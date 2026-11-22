@@ -1,0 +1,3 @@
+# Cài tất cả để chạy thử trên một máy (xem README để biết từng phần)
+-r server/requirements.txt
+-r agent/requirements.txt

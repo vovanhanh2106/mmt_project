@@ -1,0 +1,11 @@
+[project]
+name = "ogk-common"
+version = "1.0.0"
+requires-python = ">=3.11"
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+[tool.setuptools.packages.find]
+include = ["ogk_common*"]
+[tool.setuptools.package-data]
+ogk_common = ["data/*.csv"]

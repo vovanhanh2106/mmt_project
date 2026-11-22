@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}OpenGuard Kids{% endblock %}</title>
+<link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+<header><a href="/" class="brand">🛡️ OpenGuard Kids</a><span class="tag">Công cụ đồng hành, không phải phần mềm theo dõi lén</span><span id="who"></span><button id="logout" class="ghost hidden">Đăng xuất</button></header>
+<main>{% block content %}{% endblock %}</main>
+<script src="/static/app.js"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<p><a href="/">← Tất cả hồ sơ</a></p>
+<h1 id="title" data-child="{{ child_id }}">Hồ sơ</h1>
+<nav class="tabs"><button data-tab="report" class="on">Báo cáo</button><button data-tab="policy">Luật</button><button data-tab="devices">Thiết bị</button><button data-tab="requests">Yêu cầu của con <span id="pend" class="badge hidden"></span></button><button data-tab="audit">Nhật ký</button></nav>
+
+<section id="tab-report" class="tab">
+  <div class="row"><label>Khoảng thời gian <select id="days"><option value="7">7 ngày</option><option value="1">Hôm nay</option><option value="30">30 ngày</option></select></label>
+  <button id="csv" class="ghost">Xuất CSV</button><button id="print" class="ghost">In / lưu PDF</button></div>
+  <div class="card"><h3>Thời gian dùng máy theo ngày</h3><div id="chart" class="chart"></div><p id="total"></p></div>
+  <div class="grid"><div class="card"><h3>Top 10 ứng dụng</h3><table id="apps"></table></div><div class="card"><h3>Top 10 tên miền</h3><table id="domains"></table></div></div>
+  <div class="card"><h3>Số lần bị chặn: <span id="blocked">0</span></h3></div>
+</section>
+
+<section id="tab-policy" class="tab hidden">
+  <div class="card"><h3>Thời gian</h3>
+    <div class="row"><label>Ngày thường (phút) <input id="q-wd" type="number" min="0" max="1440"></label><label>Cuối tuần (phút) <input id="q-we" type="number" min="0" max="1440"></label>
+    <label>Ân hạn trước khi khóa (giây) <input id="grace" type="number" min="0" max="300"></label><label>Nghỉ không thao tác (giây) <input id="idle" type="number" min="60" max="3600"></label></div>
+    <div class="row"><label>Ngân sách nhóm Trò chơi (phút, trống = không giới hạn) <input id="g-games" type="number" min="0"></label><label>Mạng xã hội (phút) <input id="g-social" type="number" min="0"></label></div>
+    <h4>Lịch tuần (mỗi ô 30 phút, bấm hoặc kéo để đổi; xanh = được dùng)</h4><div id="grid" class="sched" aria-label="Lịch tuần"></div>
+    <div class="row"><button id="all-on" class="ghost">Cho phép tất cả</button><button id="all-off" class="ghost">Khóa tất cả</button></div></div>
+  <div class="card"><h3>Nhóm trang web</h3><div id="cats" class="grid"></div><label><input type="checkbox" id="safesearch"> Ép SafeSearch (Google, Bing, YouTube, DuckDuckGo)</label></div>
+  <div class="card"><h3>Luật tên miền riêng</h3><div class="row"><input id="dr-domain" placeholder="ví dụ: example.com"><select id="dr-action"><option value="block">Chặn</option><option value="allow">Cho phép</option></select><button id="dr-add" class="ghost">Thêm</button></div><table id="dr-list"></table></div>
+  <div class="card"><h3>Luật ứng dụng</h3><label>Chế độ <select id="app-mode"><option value="denylist">Chặn theo danh sách</option><option value="allowlist">Chỉ cho phép theo danh sách</option></select></label>
+    <div class="row"><input id="ar-name" placeholder="tên tệp, ví dụ game.exe"><input id="ar-sha" placeholder="SHA-256 (tuỳ chọn, chống đổi tên)"><select id="ar-group"><option value="">(không nhóm)</option><option value="games">Trò chơi</option></select><select id="ar-action"><option value="block">Chặn</option><option value="allow">Cho phép</option></select><button id="ar-add" class="ghost">Thêm</button></div><table id="ar-list"></table></div>
+  <div class="card"><h3>Mất kết nối máy chủ</h3><div class="row"><label>Sau <input id="off-days" type="number" min="1" max="60"> ngày <select id="fail"><option value="fail_open">Nới lỏng (fail-open)</option><option value="fail_closed">Khóa máy (fail-closed)</option></select></label></div></div>
+  <button id="save">Lưu luật (hiệu lực trên máy con trong ≤ 60 giây)</button><p id="pmsg" class="msg" role="alert"></p>
+</section>
+
+<section id="tab-devices" class="tab hidden">
+  <div class="card"><h3>Ghép đôi máy mới</h3><button id="pair">Tạo mã ghép (hiệu lực 10 phút)</button><p id="code" class="code"></p>
+  <small>Chạy trên máy của con (quyền Administrator): <code>install_windows.ps1 -Server https://… -Pin … -Code MÃ</code>. Việc ghép đôi là bước ghi nhận sự đồng ý của phụ huynh (Nghị định 13/2023/NĐ-CP).</small></div>
+  <div id="devs"></div>
+  <div class="card danger"><h3>Xóa dữ liệu</h3><button id="wipe" class="danger-btn">Xóa toàn bộ dữ liệu của con tôi</button><small>Xóa trên máy chủ và trong bộ đệm của agent. Dữ liệu cũng tự xóa sau 90 ngày.</small></div>
+</section>
+
+<section id="tab-requests" class="tab hidden"><div id="reqs"></div></section>
+<section id="tab-audit" class="tab hidden"><div class="card"><table id="auditt"></table></div></section>
+{% endblock %}
+{% block scripts %}<script src="/static/child.js"></script>{% endblock %}

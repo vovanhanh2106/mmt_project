@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Con của bạn</h1>
+<div id="children" class="grid"></div>
+<section class="card narrow"><h2>Thêm hồ sơ cho con</h2>
+  <label>Tên con <input id="cname" maxlength="50"></label>
+  <label>Độ tuổi <select id="cage"><option>6-11</option><option>12-14</option><option>15-17</option></select></label>
+  <button id="addchild">Thêm</button><p id="msg" class="msg"></p></section>
+<section class="card"><h2>Nguyên tắc minh bạch</h2>
+<p>Con luôn thấy biểu tượng OGK trên máy, được xem cùng báo cáo với bạn, xem được nhật ký đổi luật, và có thể gửi yêu cầu xin thêm giờ / báo chặn nhầm.
+Sản phẩm không đọc nội dung tin nhắn, không chụp màn hình, không ghi phím gõ. Chỉ dùng trên máy của con bạn khi con biết và đồng ý đồng hành.</p></section>
+{% endblock %}
+{% block scripts %}<script src="/static/index.js"></script>{% endblock %}

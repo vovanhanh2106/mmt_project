@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Đăng nhập – OpenGuard Kids{% endblock %}
+{% block content %}
+<section class="card narrow">
+  <h1>Đăng nhập phụ huynh</h1>
+  <label>Email <input id="email" type="email" autocomplete="username"></label>
+  <label>Mật khẩu <input id="password" type="password" autocomplete="current-password"></label>
+  <label>Mã 2FA (nếu đã bật) <input id="totp" inputmode="numeric" maxlength="6"></label>
+  <div class="row"><button id="login">Đăng nhập</button><button id="register" class="ghost">Tạo tài khoản</button></div>
+  <p id="msg" class="msg" role="alert"></p>
+  <details><summary>Tạo tài khoản mới</summary>
+    <label>Tên hiển thị (trẻ sẽ thấy tên này khi xem ai đặt luật) <input id="dname" maxlength="100"></label>
+    <small>Mật khẩu tối thiểu 10 ký tự, gồm chữ hoa, chữ thường và số.</small>
+  </details>
+</section>
+{% endblock %}
+{% block scripts %}<script src="/static/login.js"></script>{% endblock %}
